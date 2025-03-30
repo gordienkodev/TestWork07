@@ -1,0 +1,43 @@
+import { mockForecast, mockForecastList } from '../CityWeather/data'
+import styles from './ForecastOverview.module.scss'
+
+export const ForecastOverview = () => {
+  return (
+    <div
+      className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-4 rounded shadow-lg`}
+    >
+      <h2 className="fs-4">
+        {mockForecast?.name}: {mockForecast?.country}
+      </h2>
+      <div className="d-flex gap-3 flex-wrap justify-content-center">
+        {mockForecastList?.list.slice(0, 7).map((forecast, index) => {
+          const date = new Date(forecast.dt * 1000)
+          return (
+            <div
+              key={index}
+              className={`d-flex flex-column align-items-center p-1 rounded shadow-sm`}
+            >
+              <h5 className="fs-6">{date.toLocaleDateString()}</h5>
+              <h3 className="fs-5">{Math.round(forecast.main.temp)}°C</h3>
+              <h6 className="fs-6">{forecast.weather[0]?.description}</h6>
+              <div className="d-flex gap-1 flex-column align-items-center">
+                <div>
+                  <span className="fs-6">Feels Like</span>
+                  <p className="fs-6">{Math.round(forecast.main.feels_like)}°C</p>
+                </div>
+                <div>
+                  <span className="fs-6">Humidity</span>
+                  <p className="fs-6">{forecast.main.humidity}%</p>
+                </div>
+                <div>
+                  <span className="fs-6">Wind Speed</span>
+                  <p className="fs-6">{Math.round(forecast.wind.speed)} m/s</p>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
