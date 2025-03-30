@@ -1,5 +1,8 @@
 @use '@/app/bootstrap-deps.scss' as *;
 
+$search-btn-color: #ffffff;
+$search-btn-hover: darken($search-btn-color, 10%);
+
 .search_input {
   border-radius: 5px;
   padding: 0.5rem 1.5rem;
@@ -17,10 +20,7 @@
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
-$search-btn-color: #2d3748;
-$search-btn-hover: darken($search-btn-color, 10%);
-
-.custom-btn {
+.custom_btn {
   @include button-outline-variant(
     $color: $search-btn-color,
     $color-hover: color-contrast($search-btn-color),
