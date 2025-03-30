@@ -1,13 +1,13 @@
-import Image from "next/image";
-import styles from "./page.module.scss";
-import Button from 'react-bootstrap/Button';  
- 
+import Image from 'next/image'
+import styles from './page.module.scss'
+import Button from 'react-bootstrap/Button'
+
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-      <Button variant="light">Light</Button>
-      <h1 className="text-danger">Hello Bootstrap</h1>
+        <Button variant="light">Light</Button>
+        <h1 className="text-danger">Hello Bootstrap</h1>
         <Image
           className={styles.logo}
           src="/next.svg"
@@ -55,13 +55,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
+          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
           Learn
         </a>
         <a
@@ -69,13 +63,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
+          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
           Examples
         </a>
         <a
@@ -83,16 +71,10 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
+          <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
           Go to nextjs.org →
         </a>
       </footer>
     </div>
-  );
+  )
 }
