@@ -8,7 +8,7 @@ export const CityWeather = () => {
     <div
       className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-5 rounded shadow-lg`}
     >
-      <h2>{weather?.city?.name}</h2>
+      <h2>{weather?.city?.name || 'Unknown city'}</h2>
 
       {loading && <p>loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}

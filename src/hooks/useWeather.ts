@@ -5,9 +5,20 @@ const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY
 const FORECAST_API_URL = 'https://api.openweathermap.org/data/2.5/forecast'
 const UNITS = 'metric'
 
+interface WeatherData {
+  city: {
+    name: string
+  }
+  list: {
+    main: {
+      temp: number
+    }
+  }[]
+}
+
 export const useWeather = () => {
   const { city } = useWeatherStore()
-  const [weather, setWeather] = useState(null)
+  const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
