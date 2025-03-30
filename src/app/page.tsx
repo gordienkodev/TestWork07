@@ -1,10 +1,13 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
-
+import Button from 'react-bootstrap/Button';  
+ 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+      <Button variant="light">Light</Button>
+      <h1 className="text-danger">Hello Bootstrap</h1>
         <Image
           className={styles.logo}
           src="/next.svg"
