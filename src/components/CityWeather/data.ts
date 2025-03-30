@@ -6,6 +6,36 @@ export const mockForecast = {
   lon: 4.8936041,
 }
 
+export const mockFavoritesCity = {
+  list: [
+    {
+      name: 'Amsterdam',
+      country: 'NL',
+      temp: 11.24,
+    },
+    {
+      name: 'United Kingdom',
+      country: 'UK',
+      temp: 12.24,
+    },
+    {
+      name: 'United Kingdom',
+      country: 'UK',
+      temp: 12.24,
+    },
+    {
+      name: 'United Kingdom',
+      country: 'UK',
+      temp: 12.24,
+    },
+    {
+      name: 'United Kingdom',
+      country: 'UK',
+      temp: 12.24,
+    },
+  ],
+}
+
 export const mockForecastList = {
   cod: '200',
   message: 0,
