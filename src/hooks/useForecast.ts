@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { ICity, TForecastType } from '../types/types'
+import axios from 'axios'
+import { IApiResponse, ICity, TForecastType } from '../types/types'
 
 const FORECAST_API_URL = 'https://api.openweathermap.org/data/2.5/forecast'
 const UNITS = 'metric'
@@ -15,13 +16,19 @@ export const useForecast = () => {
     try {
       setLoading(true)
       setError(null)
-      const response = await fetch(
-        `${FORECAST_API_URL}?lat=${city.lat}&lon=${city.lon}&units=${UNITS}&appid=${API_KEY}`
-      )
-      if (!response.ok) throw new Error('Error fetching forecast')
-      const data = await response.json()
+
+      const { data } = await axios.get<IApiResponse>(FORECAST_API_URL, {
+        params: {
+          lat: city.lat,
+          lon: city.lon,
+          units: UNITS,
+          appid: API_KEY,
+        },
+      })
+
       setForecast({
-        ...data.city,
+        name: data.city.name,
+        country: data.city.country,
         list: data.list.slice(0, 40),
       })
     } catch (err) {

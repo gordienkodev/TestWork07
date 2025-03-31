@@ -1,5 +1,6 @@
 'use client'
 import { useState, ChangeEvent } from 'react'
+import axios from 'axios'
 import useDebounce from '../app/utils/useDebounce'
 import { ICity } from '../types/types'
 
@@ -14,14 +15,15 @@ export const useCitySearch = () => {
 
   const fetchCities = async (query: string) => {
     try {
-      const response = await fetch(
-        `${GEO_API_URL}?q=${query.trim()}&limit=${LIMIT}&appid=${API_KEY}`
-      )
-      if (!response.ok) throw new Error('Error fetching cities')
-
-      const data = await response.json()
+      const { data } = await axios.get<ICity[]>(GEO_API_URL, {
+        params: {
+          q: query.trim(),
+          limit: LIMIT,
+          appid: API_KEY,
+        },
+      })
       setOptions(
-        data.map((item: ICity) => ({
+        data.map(item => ({
           name: item.name,
           country: item.country,
           lat: item.lat,
