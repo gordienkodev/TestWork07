@@ -4,6 +4,7 @@ import { useCurrentSearch } from '../../store/useCurrentSearch'
 import { ForecastOverview } from '../../components/ForecastOverview/ForecastOverview'
 import { useForecast } from '../../hooks/useForecast'
 import styles from './page.module.scss'
+import { Header } from '../../components/Header/Header'
 
 export default function Forecast() {
   const { currentSearch } = useCurrentSearch()
@@ -29,6 +30,7 @@ export default function Forecast() {
 
   return (
     <div className={styles.page}>
+      <Header />
       <main
         className={`${styles.custom_gradient} d-flex flex-column gap-3 justify-content-center align-items-center vh-100 w-100`}
       >

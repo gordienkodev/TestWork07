@@ -1,14 +1,10 @@
 'use client'
-import { forecastType, optionType } from '../../hooks/useForecast'
+
 import { useRouter } from 'next/navigation'
+import { ICityWeatherProps } from '../../types/types'
 import styles from './CityWeather.module.scss'
 
-type CityWeatherProps = {
-  forecast: forecastType
-  selectedCity: optionType
-}
-
-export const CityWeather = ({ forecast, selectedCity }: CityWeatherProps) => {
+export const CityWeather = ({ forecast, selectedCity }: ICityWeatherProps) => {
   const currentWeather = forecast.list[0]
   const router = useRouter()
 

@@ -4,11 +4,12 @@ import { Search } from '../components/Search/Search'
 import { CityWeather } from '../components/CityWeather/CityWeather'
 import styles from './page.module.scss'
 import { useForecast } from '../hooks/useForecast'
-import { optionType } from '../hooks/useForecast'
+import { Header } from '../components/Header/Header'
+import { ICity } from '../types/types'
 
 export default function Home() {
   const { forecast, loading, error, fetchForecast } = useForecast()
-  const [selectedCity, setSelectedCity] = useState<optionType | null>(null)
+  const [selectedCity, setSelectedCity] = useState<ICity | null>(null)
   const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
@@ -18,13 +19,14 @@ export default function Home() {
     }
   }, [selectedCity, hasSearched, fetchForecast])
 
-  const handleSearchSubmit = (selectedCity: optionType) => {
+  const handleSearchSubmit = (selectedCity: ICity) => {
     setSelectedCity(selectedCity)
     setHasSearched(false)
   }
 
   return (
     <div className={styles.page}>
+      <Header />
       <main
         className={`${styles.custom_gradient} d-flex flex-column gap-3 justify-content-center align-items-center vh-100 w-100`}
       >

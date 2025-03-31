@@ -2,19 +2,9 @@
 import { useCitySearch } from '../../hooks/useCitySearch'
 import styles from './Search.module.scss'
 import { useCurrentSearch } from '../../store/useCurrentSearch'
+import { ICity, ISearchProps } from '../../types/types'
 
-type OptionType = {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
-interface SearchProps {
-  onSearchSubmit: (selectedCity: OptionType) => void
-}
-
-export const Search = ({ onSearchSubmit }: SearchProps) => {
+export const Search = ({ onSearchSubmit }: ISearchProps) => {
   const { term, options, selectedOption, onInputChange, onOptionSelect } = useCitySearch()
 
   const { setCurrentSearch } = useCurrentSearch()
@@ -29,7 +19,7 @@ export const Search = ({ onSearchSubmit }: SearchProps) => {
     }
   }
 
-  const handleCitySelect = (city: OptionType) => {
+  const handleCitySelect = (city: ICity) => {
     onOptionSelect(city)
   }
 

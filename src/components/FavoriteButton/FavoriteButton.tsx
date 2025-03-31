@@ -1,13 +1,10 @@
 'use client'
 
 import { useFavorites } from '../../store/useFavorites'
-import { optionType } from '../CityWeather/types'
+import { IFavoriteButtonProps } from '../../types/types'
+import styles from './FavoriteButton.module.scss'
 
-interface FavoriteButtonProps {
-  selectedCity: optionType
-}
-
-export const FavoriteButton = ({ selectedCity }: FavoriteButtonProps) => {
+export const FavoriteButton = ({ selectedCity }: IFavoriteButtonProps) => {
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites()
 
   const isFavorite = favorites.some(
@@ -25,7 +22,7 @@ export const FavoriteButton = ({ selectedCity }: FavoriteButtonProps) => {
   return (
     <button
       onClick={handleClick}
-      className={`btn ${isFavorite ? 'btn-danger' : 'btn-outline-primary'}`}
+      className={`${styles.favorite_button} ${isFavorite ? styles.active : ''}`}
     >
       {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
     </button>
