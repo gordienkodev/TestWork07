@@ -1,18 +1,41 @@
 'use client'
-import { useWeather } from '../../hooks/useWeather'
+import { forecastType, optionType } from '../../hooks/useForecast'
+import { useRouter } from 'next/navigation'
 import styles from './CityWeather.module.scss'
 
-export const CityWeather = () => {
-  const { weather, loading, error } = useWeather()
+type CityWeatherProps = {
+  forecast: forecastType
+  selectedCity: optionType
+}
+
+export const CityWeather = ({ forecast, selectedCity }: CityWeatherProps) => {
+  const currentWeather = forecast.list[0]
+  const router = useRouter()
+
+  const handleCardClick = () => {
+    router.push(`/forecast`)
+  }
+
   return (
     <div
       className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-5 rounded shadow-lg`}
+      onClick={handleCardClick}
     >
-      <h2>{weather?.city?.name || 'Unknown city'}</h2>
+      <h2>
+        {selectedCity?.name}, {selectedCity?.country}
+      </h2>
 
-      {loading && <p>loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {weather && <h3>{Math.round(weather?.list[0]?.main?.temp)}°C</h3>}
+      {!currentWeather && <p>Loading...</p>}
+
+      {currentWeather && (
+        <>
+          <h3>{Math.round(currentWeather.main.temp)}°C</h3>
+          <p>{currentWeather.weather[0]?.description || 'No description available'}</p>
+          <p>Feels like: {Math.round(currentWeather.main.feels_like)}°C</p>
+          <p>Humidity: {currentWeather.main.humidity}%</p>
+          <p>Wind: {Math.round(currentWeather.wind.speed)} m/s</p>
+        </>
+      )}
     </div>
   )
 }

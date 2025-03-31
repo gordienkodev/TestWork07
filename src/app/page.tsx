@@ -1,15 +1,40 @@
-import { CityWeather } from '../components/CityWeather/CityWeather'
+'use client'
+import { useState, useEffect } from 'react'
 import { Search } from '../components/Search/Search'
+import { CityWeather } from '../components/CityWeather/CityWeather'
 import styles from './page.module.scss'
+import { useForecast } from '../hooks/useForecast'
+import { optionType } from '../hooks/useForecast'
 
 export default function Home() {
+  const { forecast, loading, error, fetchForecast } = useForecast()
+  const [selectedCity, setSelectedCity] = useState<optionType | null>(null)
+  const [hasSearched, setHasSearched] = useState(false)
+
+  useEffect(() => {
+    if (selectedCity && !hasSearched) {
+      fetchForecast(selectedCity)
+      setHasSearched(true)
+    }
+  }, [selectedCity, hasSearched, fetchForecast])
+
+  const handleSearchSubmit = (selectedCity: optionType) => {
+    setSelectedCity(selectedCity)
+    setHasSearched(false)
+  }
+
   return (
     <div className={styles.page}>
       <main
         className={`${styles.custom_gradient} d-flex flex-column gap-3 justify-content-center align-items-center vh-100 w-100`}
       >
-        <Search />
-        <CityWeather />
+        <Search onSearchSubmit={handleSearchSubmit} />
+
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {forecast && selectedCity && !loading && !error && (
+          <CityWeather forecast={forecast} selectedCity={selectedCity} />
+        )}
       </main>
     </div>
   )

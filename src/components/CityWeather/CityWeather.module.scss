@@ -16,3 +16,14 @@
 
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
+
+.custom_styles {
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.custom_styles:hover {
+  transform: scale(1.01);
+  background-color: #e2e1e1;
+}
