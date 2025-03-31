@@ -1,5 +1,4 @@
 # SPA for AbeloHost
-# SPA for AbeloHost
 
 ## Technical Requirements
 
