@@ -43,8 +43,6 @@ export type TForecastType = {
     pop: number
     visibility: number
   }[]
-  sunrise: number
-  sunset: number
 }
 
 export interface ICityWeatherProps {
@@ -105,4 +103,9 @@ export interface IFavoritesStore {
   favorites: ICity[]
   addToFavorites: (city: ICity) => void
   removeFromFavorites: (city: ICity) => void
+}
+
+export interface IApiResponse {
+  city: ICity
+  list: TForecastType['list']
 }
