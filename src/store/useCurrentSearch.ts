@@ -1,19 +1,8 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { TCurrentSearchState } from '../types/types'
 
-type City = {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
-type CurrentSearchState = {
-  currentSearch: City | null
-  setCurrentSearch: (city: City) => void
-}
-
-export const useCurrentSearch = create<CurrentSearchState>()(
+export const useCurrentSearch = create<TCurrentSearchState>()(
   devtools(
     set => ({
       currentSearch: null,

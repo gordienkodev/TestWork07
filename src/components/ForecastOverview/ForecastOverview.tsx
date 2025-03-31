@@ -1,61 +1,55 @@
 'use client'
 
+import { TDailyForecast, IForecastOverviewProps, TForecastType } from '../../types/types'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import styles from './ForecastOverview.module.scss'
 
-export type ForecastType = {
-  name: string
-  country: string
-  list: [
-    {
-      dt: number
-      main: {
-        feels_like: number
-        humidity: number
-        pressure: number
-        temp: number
-        temp_max: number
-        temp_min: number
+const groupForecastByDay = (forecastList: TForecastType['list']): TDailyForecast[] => {
+  const dailyForecast = forecastList.reduce<Record<string, Omit<TDailyForecast, 'date'>>>(
+    (acc, item) => {
+      const date = new Date(item.dt * 1000).toLocaleDateString()
+
+      if (!acc[date]) {
+        acc[date] = {
+          temp: 0,
+          feels_like: 0,
+          humidity: 0,
+          wind: 0,
+          description: '',
+          icon: item.weather[0]?.icon || '',
+        }
       }
-      weather: [
-        {
-          main: string
-          icon: string
-          description: string
-        },
-      ]
-      wind: {
-        speed: number
-        gust: number
-        deg: number
-      }
-      clouds: {
-        all: number
-      }
-      pop: number
-      visibility: number
+
+      const dayData = acc[date]
+
+      dayData.temp += item.main.temp
+      dayData.feels_like += item.main.feels_like
+      dayData.humidity += item.main.humidity
+      dayData.wind += item.wind.speed
+      dayData.description = item.weather[0]?.description || dayData.description
+
+      return acc
     },
-  ]
-  sunrise: number
-  sunset: number
+    {}
+  )
+
+  return Object.entries(dailyForecast).map(([date, data]) => ({
+    date,
+    temp: Math.round(data.temp / 8),
+    feels_like: Math.round(data.feels_like / 8),
+    humidity: Math.round(data.humidity / 8),
+    wind: Math.round(data.wind / 8),
+    description: data.description,
+    icon: data.icon,
+  }))
 }
 
-type City = {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
-interface ForecastOverviewProps {
-  forecast: ForecastType
-  currentSearch: City
-}
-
-export const ForecastOverview = ({ forecast, currentSearch }: ForecastOverviewProps) => {
+export const ForecastOverview = ({ forecast, currentSearch }: IForecastOverviewProps) => {
   if (!forecast) {
     return <div>No data available</div>
   }
+
+  const dailyForecast = groupForecastByDay(forecast.list).slice(0, 6)
 
   return (
     <div
@@ -64,35 +58,28 @@ export const ForecastOverview = ({ forecast, currentSearch }: ForecastOverviewPr
       <h2 className="fs-4">
         {currentSearch?.name}, {currentSearch?.country}
       </h2>
-      <div className="d-flex gap-3 flex-wrap justify-content-center">
-        {forecast?.list.slice(0, 6).map((forecastItem, index) => {
-          const date = new Date(forecastItem.dt * 1000)
-          return (
-            <div
-              key={index}
-              className={`d-flex flex-column align-items-center p-1 rounded shadow-sm`}
-            >
-              <h5 className="fs-6">{date.toLocaleDateString()}</h5>
-              <h3 className="fs-5">{Math.round(forecastItem.main.temp)}°C</h3>
-              <h6 className="fs-6">{forecastItem.weather[0]?.description}</h6>
-              <div className="d-flex gap-1 flex-column align-items-center">
-                <div>
-                  <span className="fs-6">Feels Like</span>
-                  <p className="fs-6">{Math.round(forecastItem.main.feels_like)}°C</p>
-                </div>
-                <div>
-                  <span className="fs-6">Humidity</span>
-                  <p className="fs-6">{forecastItem.main.humidity}%</p>
-                </div>
-                <div>
-                  <span className="fs-6">Wind Speed</span>
-                  <p className="fs-6">{Math.round(forecastItem.wind.speed)} m/s</p>
-                </div>
+
+      <div className={styles.forecast_container}>
+        {dailyForecast.map((day, index) => (
+          <div key={index} className={styles.forecast_card}>
+            <h5 className="fs-6">{day.date}</h5>
+            <img src={`https://openweathermap.org/img/wn/${day.icon}.png`} alt={day.description} />
+            <h3 className="fs-5">{day.temp}°C</h3>
+            <h6 className="fs-6">{day.description}</h6>
+            <div className="d-flex gap-1 flex-column align-items-center">
+              <div>
+                <span className="fs-6">Humidity</span>
+                <p className="fs-6">{day.humidity}%</p>
+              </div>
+              <div>
+                <span className="fs-6">Wind Speed</span>
+                <p className="fs-6">{day.wind} m/s</p>
               </div>
             </div>
-          )
-        })}
+          </div>
+        ))}
       </div>
+
       <FavoriteButton selectedCity={currentSearch} />
     </div>
   )

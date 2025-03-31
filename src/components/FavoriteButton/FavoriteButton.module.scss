@@ -1,0 +1,30 @@
+.favorite_button {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 8px 16px;
+  margin: 15px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.95);
+  }
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #d44949;
+  border-color: #ff6464;
+
+  &:hover {
+    background: rgba(255, 100, 100, 0.3);
+  }
+}

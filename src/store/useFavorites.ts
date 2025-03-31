@@ -1,20 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { IFavoritesStore } from '../types/types'
 
-type City = {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
-interface FavoritesStore {
-  favorites: City[]
-  addToFavorites: (city: City) => void
-  removeFromFavorites: (city: City) => void
-}
-
-export const useFavorites = create<FavoritesStore, [['zustand/persist', FavoritesStore]]>(
+export const useFavorites = create<IFavoritesStore, [['zustand/persist', IFavoritesStore]]>(
   persist(
     set => ({
       favorites: [],

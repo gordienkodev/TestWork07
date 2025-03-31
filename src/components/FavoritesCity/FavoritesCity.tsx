@@ -1,19 +1,9 @@
 'use client'
+import { IFavoritesCityProps } from '../../types/types'
 import { CityCard } from '../CityCard/CityCard'
 import styles from './FavoritesCity.module.scss'
 
-interface City {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
-interface FavoritesCityProps {
-  favoriteCities: City[]
-}
-
-export const FavoritesCity = ({ favoriteCities }: FavoritesCityProps) => {
+export const FavoritesCity = ({ favoriteCities }: IFavoritesCityProps) => {
   return (
     <div
       className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-4 rounded shadow-lg`}

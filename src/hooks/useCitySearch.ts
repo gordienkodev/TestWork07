@@ -1,22 +1,16 @@
 'use client'
 import { useState, ChangeEvent } from 'react'
 import useDebounce from '../app/utils/useDebounce'
+import { ICity } from '../types/types'
 
 const GEO_API_URL = 'https://api.openweathermap.org/geo/1.0/direct'
 const LIMIT = 5
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY
 
-type optionType = {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
 export const useCitySearch = () => {
   const [term, setTerm] = useState<string>('')
-  const [options, setOptions] = useState<optionType[]>([])
-  const [selectedOption, setSelectedOption] = useState<optionType | null>(null)
+  const [options, setOptions] = useState<ICity[]>([])
+  const [selectedOption, setSelectedOption] = useState<ICity | null>(null)
 
   const fetchCities = async (query: string) => {
     try {
@@ -27,7 +21,7 @@ export const useCitySearch = () => {
 
       const data = await response.json()
       setOptions(
-        data.map((item: optionType) => ({
+        data.map((item: ICity) => ({
           name: item.name,
           country: item.country,
           lat: item.lat,
@@ -49,7 +43,7 @@ export const useCitySearch = () => {
     debouncedFetch()
   }
 
-  const onOptionSelect = (option: optionType) => {
+  const onOptionSelect = (option: ICity) => {
     setTerm(option.name)
     setSelectedOption(option)
     setOptions([])

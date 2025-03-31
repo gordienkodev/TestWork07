@@ -3,21 +3,11 @@
 import { useEffect, useState } from 'react'
 import { useForecast } from '../../hooks/useForecast'
 import { useRouter } from 'next/navigation'
-import styles from './CityCard.module.scss'
 import { useCurrentSearch } from '../../store/useCurrentSearch'
+import { ICityCardProps } from '../../types/types'
+import styles from './CityCard.module.scss'
 
-interface City {
-  name: string
-  country: string
-  lat: number
-  lon: number
-}
-
-interface CityCardProps {
-  city: City
-}
-
-export const CityCard = ({ city }: CityCardProps) => {
+export const CityCard = ({ city }: ICityCardProps) => {
   const { forecast, loading, error, fetchForecast } = useForecast()
   const [isFetched, setIsFetched] = useState(false)
   const router = useRouter()
