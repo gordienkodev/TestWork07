@@ -1,5 +1,6 @@
 'use client'
 
+import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import styles from './ForecastOverview.module.scss'
 
 export type ForecastType = {
@@ -92,6 +93,7 @@ export const ForecastOverview = ({ forecast, currentSearch }: ForecastOverviewPr
           )
         })}
       </div>
+      <FavoriteButton selectedCity={currentSearch} />
     </div>
   )
 }
