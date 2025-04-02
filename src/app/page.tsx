@@ -2,25 +2,51 @@
 import { useState, useEffect } from 'react'
 import { Search } from '../components/Search/Search'
 import { CityWeather } from '../components/CityWeather/CityWeather'
-import styles from './page.module.scss'
 import { useForecast } from '../hooks/useForecast'
 import { Header } from '../components/Header/Header'
-import { ICity } from '../types/types'
+import { useSearchHistory } from '../store/useSearchHistory'
+import { ICity, ICityWithForecast } from '../types/types'
+import styles from './page.module.scss'
 
 export default function Home() {
   const { forecast, loading, error, fetchForecast } = useForecast()
-  const [selectedCity, setSelectedCity] = useState<ICity | null>(null)
+  const [selectedCity, setSelectedCity] = useState<ICityWithForecast | null>(null)
   const [hasSearched, setHasSearched] = useState(false)
+  const { addSearch, getCityForecast } = useSearchHistory()
 
   useEffect(() => {
-    if (selectedCity && !hasSearched) {
-      fetchForecast(selectedCity)
-      setHasSearched(true)
-    }
-  }, [selectedCity, hasSearched, fetchForecast])
+    const checkCacheAndFetch = async () => {
+      if (selectedCity) {
+        const cached = getCityForecast(selectedCity.name, selectedCity.country)
 
-  const handleSearchSubmit = (selectedCity: ICity) => {
-    setSelectedCity(selectedCity)
+        if (cached?.forecast) {
+          setSelectedCity({
+            ...selectedCity,
+            forecast: cached.forecast,
+          })
+        } else {
+          await fetchForecast(selectedCity)
+        }
+        setHasSearched(true)
+      }
+    }
+
+    if (selectedCity && !hasSearched) {
+      checkCacheAndFetch()
+    }
+  }, [selectedCity, hasSearched, fetchForecast, getCityForecast])
+
+  useEffect(() => {
+    if (forecast && selectedCity) {
+      addSearch({
+        ...selectedCity,
+        forecast,
+      })
+    }
+  }, [forecast, selectedCity, addSearch])
+
+  const handleSearchSubmit = (city: ICity) => {
+    setSelectedCity(city)
     setHasSearched(false)
   }
 
@@ -34,8 +60,8 @@ export default function Home() {
 
         {loading && <p>Loading...</p>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        {forecast && selectedCity && !loading && !error && (
-          <CityWeather forecast={forecast} selectedCity={selectedCity} />
+        {selectedCity?.forecast && !loading && !error && (
+          <CityWeather forecast={selectedCity.forecast} selectedCity={selectedCity} />
         )}
       </main>
     </div>
