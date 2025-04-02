@@ -4,27 +4,47 @@ import { useEffect, useState } from 'react'
 import { useForecast } from '../../hooks/useForecast'
 import { useRouter } from 'next/navigation'
 import { useCurrentSearch } from '../../store/useCurrentSearch'
-import { ICityCardProps } from '../../types/types'
+import { useSearchHistory } from '../../store/useSearchHistory'
+import { ICityCardProps, TForecastType } from '../../types/types'
 import styles from './CityCard.module.scss'
 
 export const CityCard = ({ city }: ICityCardProps) => {
+  const { getCityForecast } = useSearchHistory()
   const { forecast, loading, error, fetchForecast } = useForecast()
   const [isFetched, setIsFetched] = useState(false)
+
+  const [localForecast, setLocalForecast] = useState<TForecastType | null>(null)
   const router = useRouter()
   const { setCurrentSearch } = useCurrentSearch()
+
   const handleCardClick = () => {
     setCurrentSearch(city)
     router.push(`/forecast`)
   }
 
   useEffect(() => {
-    if (!isFetched) {
-      fetchForecast(city)
-      setIsFetched(true)
-    }
-  }, [city, fetchForecast, isFetched])
+    const checkCacheAndFetch = async () => {
+      const cached = getCityForecast(city.name, city.country)
 
-  if (loading) {
+      if (cached?.forecast) {
+        setLocalForecast(cached.forecast)
+        setIsFetched(true)
+      } else {
+        if (!isFetched) {
+          await fetchForecast(city)
+          setIsFetched(true)
+        }
+      }
+    }
+
+    if (!isFetched && !localForecast) {
+      checkCacheAndFetch()
+    }
+  }, [city, fetchForecast, isFetched, localForecast, getCityForecast])
+
+  const displayForecast = localForecast || forecast
+
+  if (loading && !isFetched) {
     return <div>Loading...</div>
   }
 
@@ -42,8 +62,8 @@ export const CityCard = ({ city }: ICityCardProps) => {
         <span className="fs-6 text-muted">({city.country})</span>
       </div>
       <div className="mt-2">
-        {forecast ? (
-          <p className="fs-4 mb-0">{Math.round(forecast.list[0].main.temp)}°C</p>
+        {displayForecast ? (
+          <p className="fs-4 mb-0">{Math.round(displayForecast.list[0].main.temp)}°C</p>
         ) : (
           <p className="fs-4 mb-0">Temperature not available</p>
         )}
