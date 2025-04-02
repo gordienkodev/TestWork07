@@ -77,23 +77,6 @@ export interface ISearchProps {
   onSearchSubmit: (selectedCity: ICity) => void
 }
 
-export interface IWeatherData {
-  city: {
-    name: string
-  }
-  list: {
-    main: {
-      temp: number
-    }
-  }[]
-}
-
-export type TSearchHistoryState = {
-  history: ICity[]
-  addSearch: (city: ICity) => void
-  getCityForecast: (name: string, country: string) => ICity | undefined
-}
-
 export interface IWeatherStore {
   city: ICity
   setCity: (city: ICity) => void
@@ -108,4 +91,17 @@ export interface IFavoritesStore {
 export interface IApiResponse {
   city: ICity
   list: TForecastType['list']
+}
+
+export interface ICityWithForecast extends ICity {
+  forecast?: TForecastType
+}
+
+export type TSearchHistoryState = {
+  history: Array<ICity & { forecast?: TForecastType }>
+  addSearch: (city: ICity & { forecast?: TForecastType }) => void
+  getCityForecast: (
+    name: string,
+    country: string
+  ) => (ICity & { forecast?: TForecastType }) | undefined
 }
