@@ -1,8 +1,8 @@
 'use client'
 import { useState, ChangeEvent } from 'react'
 import axios from 'axios'
-import useDebounce from '../app/utils/useDebounce'
-import { ICity } from '../types/types'
+import useDebounce from '@/app/utils/useDebounce'
+import { ICity } from '@/types/types'
 
 const GEO_API_URL = 'https://api.openweathermap.org/geo/1.0/direct'
 const LIMIT = 5

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { IFavoritesStore } from '../types/types'
+import { IFavoritesStore } from '@/types/types'
 
 export const useFavorites = create<IFavoritesStore, [['zustand/persist', IFavoritesStore]]>(
   persist(
