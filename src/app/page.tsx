@@ -1,4 +1,5 @@
 'use client'
+
 import { useState, useEffect } from 'react'
 import { Search } from '@/components/Search/Search'
 import { CityWeather } from '@/components/CityWeather/CityWeather'
@@ -53,9 +54,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <Header />
-      <main
-        className={`${styles.custom_gradient} d-flex flex-column gap-3 justify-content-center align-items-center vh-100 w-100`}
-      >
+      <main className={`${styles.custom_gradient} ${styles.main}`}>
         <Search onSearchSubmit={handleSearchSubmit} />
 
         {loading && <p>Loading...</p>}
