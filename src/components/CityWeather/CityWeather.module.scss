@@ -15,15 +15,32 @@
   color: #3f3f46;
 
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
+  border-radius: 0.375rem;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-.custom_styles {
   transition:
     transform 0.3s ease,
     background-color 0.3s ease;
-}
 
-.custom_styles:hover {
-  transform: scale(1.01);
-  background-color: #e2e1e1;
+  &:hover {
+    transform: scale(1.01);
+    background-color: #e2e1e1;
+  }
+
+  h2 {
+    margin: 0 0 1rem 0;
+  }
+
+  h3 {
+    margin: 1rem 0;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
 }

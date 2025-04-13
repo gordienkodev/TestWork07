@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useForecast } from '../../hooks/useForecast'
+import { useForecast } from '@/hooks/useForecast'
 import { useRouter } from 'next/navigation'
-import { useCurrentSearch } from '../../store/useCurrentSearch'
-import { useSearchHistory } from '../../store/useSearchHistory'
-import { ICityCardProps, TForecastType } from '../../types/types'
+import { useCurrentSearch } from '@/store/useCurrentSearch'
+import { useSearchHistory } from '@/store/useSearchHistory'
+import { ICityCardProps, TForecastType } from '@/types/types'
 import styles from './CityCard.module.scss'
 
 export const CityCard = ({ city }: ICityCardProps) => {
@@ -53,19 +53,18 @@ export const CityCard = ({ city }: ICityCardProps) => {
   }
 
   return (
-    <div
-      className={`${styles.city_card} d-flex flex-column align-items-center p-3 rounded shadow-sm`}
-      onClick={handleCardClick}
-    >
-      <div className="d-flex align-items-baseline gap-2">
-        <h3 className="fs-5 mb-0">{city.name}</h3>
-        <span className="fs-6 text-muted">({city.country})</span>
+    <div className={styles.city_card} onClick={handleCardClick}>
+      <div className={styles.header}>
+        <h3 className={styles.city_name}>{city.name}</h3>
+        <span className={styles.country}>({city.country})</span>
       </div>
-      <div className="mt-2">
+      <div className={styles.temperature}>
         {displayForecast ? (
-          <p className="fs-4 mb-0">{Math.round(displayForecast.list[0].main.temp)}°C</p>
+          <p className={styles.temperature_value}>
+            {Math.round(displayForecast.list[0].main.temp)}°C
+          </p>
         ) : (
-          <p className="fs-4 mb-0">Temperature not available</p>
+          <p className={styles.temperature_value}>Temperature not available</p>
         )}
       </div>
     </div>

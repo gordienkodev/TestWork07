@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { TCurrentSearchState } from '../types/types'
+import { TCurrentSearchState } from '@/types/types'
 
 export const useCurrentSearch = create<TCurrentSearchState>()(
   devtools(

@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import axios from 'axios'
-import { IApiResponse, ICity, TForecastType } from '../types/types'
+import { IApiResponse, ICity, TForecastType } from '@/types/types'
 
 const FORECAST_API_URL = 'https://api.openweathermap.org/data/2.5/forecast'
 const UNITS = 'metric'

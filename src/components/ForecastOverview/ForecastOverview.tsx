@@ -1,7 +1,8 @@
 'use client'
 
-import { TDailyForecast, IForecastOverviewProps, TForecastType } from '../../types/types'
+import { TDailyForecast, IForecastOverviewProps, TForecastType } from '@/types/types'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
+import Image from 'next/image'
 import styles from './ForecastOverview.module.scss'
 
 const groupForecastByDay = (forecastList: TForecastType['list']): TDailyForecast[] => {
@@ -52,28 +53,31 @@ export const ForecastOverview = ({ forecast, currentSearch }: IForecastOverviewP
   const dailyForecast = groupForecastByDay(forecast.list).slice(0, 6)
 
   return (
-    <div
-      className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-4 rounded shadow-lg`}
-    >
-      <h2 className="fs-4">
+    <div className={styles.custom_styles}>
+      <h2>
         {currentSearch?.name}, {currentSearch?.country}
       </h2>
 
       <div className={styles.forecast_container}>
         {dailyForecast.map((day, index) => (
           <div key={index} className={styles.forecast_card}>
-            <h5 className="fs-6">{day.date}</h5>
-            <img src={`https://openweathermap.org/img/wn/${day.icon}.png`} alt={day.description} />
-            <h3 className="fs-5">{day.temp}°C</h3>
-            <h6 className="fs-6">{day.description}</h6>
-            <div className="d-flex gap-1 flex-column align-items-center">
+            <h5>{day.date}</h5>
+            <Image
+              src={`https://openweathermap.org/img/wn/${day.icon}.png`}
+              alt={day.description}
+              width={50}
+              height={50}
+            />
+            <h3>{day.temp}°C</h3>
+            <h6>{day.description}</h6>
+            <div className={styles['d-flex']}>
               <div>
-                <span className="fs-6">Humidity</span>
-                <p className="fs-6">{day.humidity}%</p>
+                <span>Humidity</span>
+                <p>{day.humidity}%</p>
               </div>
               <div>
-                <span className="fs-6">Wind Speed</span>
-                <p className="fs-6">{day.wind} m/s</p>
+                <span>Wind Speed</span>
+                <p>{day.wind} m/s</p>
               </div>
             </div>
           </div>

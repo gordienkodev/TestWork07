@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ICityWeatherProps } from '../../types/types'
+import { ICityWeatherProps } from '@/types/types'
 import styles from './CityWeather.module.scss'
 
 export const CityWeather = ({ forecast, selectedCity }: ICityWeatherProps) => {
@@ -13,10 +13,7 @@ export const CityWeather = ({ forecast, selectedCity }: ICityWeatherProps) => {
   }
 
   return (
-    <div
-      className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-5 rounded shadow-lg`}
-      onClick={handleCardClick}
-    >
+    <div className={styles.custom_styles} onClick={handleCardClick}>
       <h2>
         {selectedCity?.name}, {selectedCity?.country}
       </h2>
