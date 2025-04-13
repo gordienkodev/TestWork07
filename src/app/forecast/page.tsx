@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import { useCurrentSearch } from '@/store/useCurrentSearch'
 import { ForecastOverview } from '@/components/ForecastOverview/ForecastOverview'
@@ -41,19 +42,17 @@ export default function Forecast() {
   }, [forecast, currentSearch, addSearch])
 
   if (loading) {
-    return <p>Loading forecast...</p>
+    return <p className={styles.loading}>Loading forecast...</p>
   }
 
   if (error) {
-    return <p>Error: {error}</p>
+    return <p className={styles.error}>Error: {error}</p>
   }
 
   return (
     <div className={styles.page}>
       <Header />
-      <main
-        className={`${styles.custom_gradient} d-flex flex-column gap-3 justify-content-center align-items-center vh-100 w-100`}
-      >
+      <main className={styles.main}>
         {currentSearch && localForecast && (
           <ForecastOverview forecast={localForecast} currentSearch={currentSearch} />
         )}
