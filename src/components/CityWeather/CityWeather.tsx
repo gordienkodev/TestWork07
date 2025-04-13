@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ICityWeatherProps } from '../../types/types'
+import { ICityWeatherProps } from '@/types/types'
 import styles from './CityWeather.module.scss'
 
 export const CityWeather = ({ forecast, selectedCity }: ICityWeatherProps) => {

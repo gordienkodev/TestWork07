@@ -1,6 +1,6 @@
 'use client'
 
-import { TDailyForecast, IForecastOverviewProps, TForecastType } from '../../types/types'
+import { TDailyForecast, IForecastOverviewProps, TForecastType } from '@/types/types'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import styles from './ForecastOverview.module.scss'
 

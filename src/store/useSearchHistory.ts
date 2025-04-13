@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { TSearchHistoryState } from '../types/types'
+import { TSearchHistoryState } from '@/types/types'
 
 export const useSearchHistory = create<TSearchHistoryState>()(
   devtools(

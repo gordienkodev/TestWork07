@@ -1,11 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Search } from '../components/Search/Search'
-import { CityWeather } from '../components/CityWeather/CityWeather'
-import { useForecast } from '../hooks/useForecast'
-import { Header } from '../components/Header/Header'
-import { useSearchHistory } from '../store/useSearchHistory'
-import { ICity, ICityWithForecast } from '../types/types'
+import { Search } from '@/components/Search/Search'
+import { CityWeather } from '@/components/CityWeather/CityWeather'
+import { Header } from '@/components/Header/Header'
+import { useForecast } from '@/hooks/useForecast'
+import { useSearchHistory } from '@/store/useSearchHistory'
+import { ICity, ICityWithForecast } from '@/types/types'
 import styles from './page.module.scss'
 
 export default function Home() {

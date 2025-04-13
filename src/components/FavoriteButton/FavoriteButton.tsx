@@ -1,7 +1,7 @@
 'use client'
 
-import { useFavorites } from '../../store/useFavorites'
-import { IFavoriteButtonProps } from '../../types/types'
+import { useFavorites } from '@/store/useFavorites'
+import { IFavoriteButtonProps } from '@/types/types'
 import styles from './FavoriteButton.module.scss'
 
 export const FavoriteButton = ({ selectedCity }: IFavoriteButtonProps) => {

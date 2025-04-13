@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useCurrentSearch } from '../../store/useCurrentSearch'
-import { ForecastOverview } from '../../components/ForecastOverview/ForecastOverview'
-import { useForecast } from '../../hooks/useForecast'
-import { Header } from '../../components/Header/Header'
-import { useSearchHistory } from '../../store/useSearchHistory'
-import { TForecastType } from '../../types/types'
+import { useCurrentSearch } from '@/store/useCurrentSearch'
+import { ForecastOverview } from '@/components/ForecastOverview/ForecastOverview'
+import { useForecast } from '@/hooks/useForecast'
+import { Header } from '@/components/Header/Header'
+import { useSearchHistory } from '@/store/useSearchHistory'
+import { TForecastType } from '@/types/types'
 import styles from './page.module.scss'
 
 export default function Forecast() {

@@ -1,7 +1,7 @@
 'use client'
-import { FavoritesCity } from '../../components/FavoritesCity/FavoritesCity'
-import { Header } from '../../components/Header/Header'
-import { useFavorites } from '../../store/useFavorites'
+import { FavoritesCity } from '@/components/FavoritesCity/FavoritesCity'
+import { Header } from '@/components/Header/Header'
+import { useFavorites } from '@/store/useFavorites'
 import styles from './page.module.scss'
 
 export default function Favorites() {

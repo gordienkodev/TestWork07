@@ -1,5 +1,5 @@
 'use client'
-import { IFavoritesCityProps } from '../../types/types'
+import { IFavoritesCityProps } from '@/types/types'
 import { CityCard } from '../CityCard/CityCard'
 import styles from './FavoritesCity.module.scss'
 

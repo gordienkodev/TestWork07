@@ -2,8 +2,8 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   sassOptions: {
-    additionalData: `$var: red;`,
-  },
+    additionalData: `$var: red;`
+  }
 }
 
 export default nextConfig

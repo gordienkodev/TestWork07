@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useForecast } from '../../hooks/useForecast'
+import { useForecast } from '@/hooks/useForecast'
 import { useRouter } from 'next/navigation'
-import { useCurrentSearch } from '../../store/useCurrentSearch'
-import { useSearchHistory } from '../../store/useSearchHistory'
-import { ICityCardProps, TForecastType } from '../../types/types'
+import { useCurrentSearch } from '@/store/useCurrentSearch'
+import { useSearchHistory } from '@/store/useSearchHistory'
+import { ICityCardProps, TForecastType } from '@/types/types'
 import styles from './CityCard.module.scss'
 
 export const CityCard = ({ city }: ICityCardProps) => {

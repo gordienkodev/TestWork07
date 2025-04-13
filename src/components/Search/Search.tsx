@@ -1,8 +1,8 @@
 'use client'
-import { useCitySearch } from '../../hooks/useCitySearch'
+import { useCitySearch } from '@/hooks/useCitySearch'
 import styles from './Search.module.scss'
-import { useCurrentSearch } from '../../store/useCurrentSearch'
-import { ICity, ISearchProps } from '../../types/types'
+import { useCurrentSearch } from '@/store/useCurrentSearch'
+import { ICity, ISearchProps } from '@/types/types'
 
 export const Search = ({ onSearchSubmit }: ISearchProps) => {
   const { term, options, selectedOption, onInputChange, onOptionSelect } = useCitySearch()
