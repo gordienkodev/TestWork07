@@ -1,4 +1,5 @@
 'use client'
+
 import { FavoritesCity } from '@/components/FavoritesCity/FavoritesCity'
 import { Header } from '@/components/Header/Header'
 import { useFavorites } from '@/store/useFavorites'
@@ -10,9 +11,7 @@ export default function Favorites() {
   return (
     <div className={styles.page}>
       <Header />
-      <main
-        className={`${styles.custom_gradient} d-flex flex-column gap-3 justify-content-center align-items-center vh-100 w-100`}
-      >
+      <main className={`${styles.custom_gradient} ${styles.main}`}>
         <FavoritesCity favoriteCities={favorites} />
       </main>
     </div>

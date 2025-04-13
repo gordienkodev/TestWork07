@@ -2,6 +2,7 @@
 
 import { TDailyForecast, IForecastOverviewProps, TForecastType } from '@/types/types'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
+import Image from 'next/image'
 import styles from './ForecastOverview.module.scss'
 
 const groupForecastByDay = (forecastList: TForecastType['list']): TDailyForecast[] => {
@@ -63,7 +64,12 @@ export const ForecastOverview = ({ forecast, currentSearch }: IForecastOverviewP
         {dailyForecast.map((day, index) => (
           <div key={index} className={styles.forecast_card}>
             <h5 className="fs-6">{day.date}</h5>
-            <img src={`https://openweathermap.org/img/wn/${day.icon}.png`} alt={day.description} />
+            <Image
+              src={`https://openweathermap.org/img/wn/${day.icon}.png`}
+              alt={day.description}
+              width={50}
+              height={50}
+            />
             <h3 className="fs-5">{day.temp}°C</h3>
             <h6 className="fs-6">{day.description}</h6>
             <div className="d-flex gap-1 flex-column align-items-center">
