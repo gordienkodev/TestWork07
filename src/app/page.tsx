@@ -38,11 +38,10 @@ export default function Home() {
   }, [selectedCity, hasSearched, fetchForecast, getCityForecast])
 
   useEffect(() => {
-    if (forecast && selectedCity) {
-      addSearch({
-        ...selectedCity,
-        forecast,
-      })
+    if (forecast && selectedCity && !selectedCity.forecast) {
+      const updatedCity = { ...selectedCity, forecast }
+      setSelectedCity(updatedCity)
+      addSearch(updatedCity)
     }
   }, [forecast, selectedCity, addSearch])
 
@@ -59,6 +58,7 @@ export default function Home() {
 
         {loading && <p>Loading...</p>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
+
         {selectedCity?.forecast && !loading && !error && (
           <CityWeather forecast={selectedCity.forecast} selectedCity={selectedCity} />
         )}
