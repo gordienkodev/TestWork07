@@ -1,4 +1,5 @@
 'use client'
+
 import { useCitySearch } from '@/hooks/useCitySearch'
 import styles from './Search.module.scss'
 import { useCurrentSearch } from '@/store/useCurrentSearch'
@@ -6,7 +7,6 @@ import { ICity, ISearchProps } from '@/types/types'
 
 export const Search = ({ onSearchSubmit }: ISearchProps) => {
   const { term, options, selectedOption, onInputChange, onOptionSelect } = useCitySearch()
-
   const { setCurrentSearch } = useCurrentSearch()
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -14,7 +14,6 @@ export const Search = ({ onSearchSubmit }: ISearchProps) => {
 
     if (selectedOption) {
       setCurrentSearch(selectedOption)
-
       onSearchSubmit(selectedOption)
     }
   }
@@ -24,9 +23,7 @@ export const Search = ({ onSearchSubmit }: ISearchProps) => {
   }
 
   return (
-    <div
-      className={`${styles.custom_styles} w-100 p-4 d-flex flex-column text-center align-items-center justify-content-center px-md-5 rounded shadow-lg`}
-    >
+    <div className={styles.custom_styles}>
       <h1>Weather Forecast</h1>
       <form className="container-fluid" onSubmit={handleSearchSubmit}>
         <div className="input-group">
